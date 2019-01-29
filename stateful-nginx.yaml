@@ -9,6 +9,7 @@ spec:
   - port: 80
     name: web
   clusterIP: None
+  type: NodePort
   selector:
     app: nginx
 ---
