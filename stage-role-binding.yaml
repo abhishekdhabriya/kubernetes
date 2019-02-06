@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: stage-role-binding
+  namespace: stage
+subjects:
+- kind: User
+  name: user2
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: staging
+  apiGroup: ""
