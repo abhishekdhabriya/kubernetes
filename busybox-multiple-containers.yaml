@@ -7,12 +7,8 @@ spec:
   - name: busybox1
     image: busybox
     command:
-      - "bin/bash"
-      - "-c"
       - "sleep 10000"
   - name: busybox2
     image: busybox
     command:
-      - "bin/bash"
-      - "-c"
       - "sleep 10000"
