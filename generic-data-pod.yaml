@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos
+spec:
+  containers:
+  - name: centos
+    image: centos
+    command:
+      - "bin/bash"
+      - "-c"
+      - "sleep 10000"
+  volumes:
+    - name: generic-pvc-storage
+      persistentVolumeClaim: 
+        claimName: generic-pvc
