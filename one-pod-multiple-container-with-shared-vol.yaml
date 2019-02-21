@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-centos-ubuntu-vol
+spec:
+  containers:
+  - name: centos
+    image: centos
+    command:
+      - "bin/bash"
+      - "-c"
+      - "sleep 10000"
+    volumeMounts:
+      - name: shared-vol
+        mountPath: "/tmp/data1"  
+  - name: ubutnu
+    image: ubuntu
+    command:
+      - "bin/bash"
+      - "-c"
+      - "sleep 10000"
+    volumeMounts:
+      - name: shared-vol
+        mountPath: "/tmp/data2"
+  volumes:
+  - name: shared-vol
+    emptyDir: {}  
