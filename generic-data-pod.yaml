@@ -10,6 +10,9 @@ spec:
       - "bin/bash"
       - "-c"
       - "sleep 10000"
+    volumeMounts:
+        - mountPath: "/var/data1"
+          name: generic-pvc-storage
   volumes:
     - name: generic-pvc-storage
       persistentVolumeClaim: 
