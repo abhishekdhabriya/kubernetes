@@ -20,11 +20,11 @@ spec:
         - containerPort: 80
           name: web
         volumeMounts:
-        - name: ngnix-conf
-          mountPath: /etc/nginx
+        - name: www
+          mountPath: /usr/share/nginx/html
   volumeClaimTemplates:
   - metadata:
-      name: generic-pvc
+      name: www
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
