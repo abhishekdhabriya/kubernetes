@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobdemo
+spec:
+  completions: 5
+  parallelism: 2
+  template:
+    metadata:
+      name: jobdemo
+    spec:
+      containers:
+      - name: counter
+        image: centos:7
+        command:
+         - "bin/bash"
+         - "-c"
+         - "for i in 1 2 3 4 5 6 7 8 9 10 ; do echo $i ; sleep 3  ; done"
+      restartPolicy: Never
