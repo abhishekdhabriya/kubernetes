@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: hellocronjob
+  name: hello
 spec:
   schedule: "*/2 * * * *"
   jobTemplate:
@@ -14,5 +14,5 @@ spec:
             args:
             - /bin/sh
             - -c
-            - date; echo Hello I'm scheduled CronJob
+            - date; echo Hello scheduled CronJob ;
           restartPolicy: OnFailure
