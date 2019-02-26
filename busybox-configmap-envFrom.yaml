@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+  - image: busybox
+    command: [ "/bin/sh", "-c", "env" ]
+    envFrom:
+        configMapKeyRef:
+            name: my-data-configmap
+    imagePullPolicy: IfNotPresent
+    name: busybox
+  restartPolicy: Always
