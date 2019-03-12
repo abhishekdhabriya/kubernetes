@@ -9,9 +9,14 @@ metadata:
   labels:
     app: 'my-nginx'
 spec:
-  backend:
-    serviceName: my-nginx
-    servicePort: 80
+  rules:
+  - host: zariga.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-nginx
+          servicePort: 80
   tls:
   - secretName: tls-prod-cert
     hosts:
