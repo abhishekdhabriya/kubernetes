@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    name: nginx-readiness
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-readiness
+  template:
+    metadata:
+      labels:
+        app: nginx-readiness
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+        command: ["sh", "-c", "touch /tmp/healthy && sleep 60"] 
+        readinessProbe:
+          exec:
+            command: 
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 3   
