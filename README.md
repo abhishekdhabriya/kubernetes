@@ -10,7 +10,7 @@ Awesome kubernetes Examples
 
 # [Kubernetes for Devops](https://leanpub.com/kube/)
 
-## Get your copy Now 
+## Get your copy Now via [leanpup](https://leanpub.com/kube/)
 
 ![kubernetes for devops](logo.png)
 
