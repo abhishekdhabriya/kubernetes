@@ -1,4 +1,4 @@
-Welcome to the kubernetes wiki!
+# Welcome to the kubernetes wiki!
 
 Awesome kubernetes Examples 
 
@@ -6,3 +6,11 @@ Awesome kubernetes Examples
 2. [kubernetes Dashboard Setup](https://8gwifi.org/docs/kube-dash.jsp)
 3. [Pod,Cluster,Deployment,Replica Set Light Dive](https://8gwifi.org/docs/kube-pods.jsp)
 4. [Deploying Secure HTTPS NGINX in Kubernetes](https://8gwifi.org/docs/kube-nginx.jsp)
+
+
+# [Kubernetes for Devops](https://leanpub.com/kube/)
+
+## Get your copy Now 
+
+![kubernetes for devops](logo.png)
+
