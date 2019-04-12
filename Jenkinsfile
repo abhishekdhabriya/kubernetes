@@ -1,13 +1,13 @@
 node {
     def app
     
-    agent {
-    label 'docker' 
-    }
+   
     
     stage('Initialize'){
         def dockerHome = tool 'docker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
+        
+        echo $env
     }
 
     stage('Clone repository') {
