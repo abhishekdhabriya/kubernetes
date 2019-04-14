@@ -1,8 +1,8 @@
 podTemplate(label: 'slave', containers: [
     containerTemplate(name: 'docker', image: 'docker:dind', ttyEnabled: true, alwaysPullImage: true, privileged: true,
-      command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay')
+      command: 'dockerd --host=unix:///var/run/docker.sock')
   ],
-  volumes: [emptyDirVolume(memory: false, mountPath: '/var/run/docker.sock')]) {
+  volumes: [emptyDirVolume(memory: false, mountPath: '/var/lib/docker')]) {
 node('slave') {
     def app
     
@@ -14,6 +14,11 @@ node('slave') {
     }
     
     sh 'printenv'
+    sh 'mount'
+    sh 'ls -l /usr/bin/docker || true'
+    sh 'ls -l /usr/local/bin/docker || true' 
+    sh 'ls -l /var/run/docker.sock || true'
+    sh 'which docker'
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
