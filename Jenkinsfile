@@ -9,11 +9,11 @@ node('slave') {
    
     
     stage('Initialize'){
-        def dockerHome = tool 'docker'
+        def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
-        
-        echo $env
     }
+    
+    sh 'printenv'
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
