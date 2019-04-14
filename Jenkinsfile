@@ -3,7 +3,7 @@ podTemplate(label: 'slave', containers: [
       command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay')
   ],
   volumes: [emptyDirVolume(memory: false, mountPath: '/var/lib/docker')]) {
-node {
+node('slave') {
     def app
     
    
