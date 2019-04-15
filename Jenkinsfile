@@ -43,12 +43,8 @@ podTemplate(label: 'kube-by-example',
     
     stage('Deploy Image') {
       container('alpine') {
-      steps{
-        script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
-          }
-        }
         }
       }
     }
