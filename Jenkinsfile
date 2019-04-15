@@ -17,7 +17,7 @@ podTemplate(label: 'kube-by-example',
   ]
 )
 {
-  node ('twistlock-example-builder') {
+  node ('kube-by-example') {
 
     stage ('Initiliaze Docker') { 
       container('jnlp') {
