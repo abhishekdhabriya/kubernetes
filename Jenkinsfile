@@ -1,6 +1,6 @@
 def project = 'anishnath'
 def  appName = 'hello'
-def  imageTag = ${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+def  imageTag = "${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
 pipeline {
   agent {
