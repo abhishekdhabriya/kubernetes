@@ -22,6 +22,10 @@ podTemplate(label: 'twistlock-example-builder',
     stage ('Pull image') { 
       container('alpine') {
         
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+        
+        
         
         sh 'uname -a'
         sh 'id'
