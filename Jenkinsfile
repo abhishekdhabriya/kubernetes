@@ -23,7 +23,15 @@ podTemplate(label: 'twistlock-example-builder',
       container('alpine') {
         
         
-        sh 'docker ps'
+        sh 'uname -a'
+        sh 'id'
+        sh 'whoami'
+        sh 'printenv'
+        sh 'mount'
+        sh 'ls -l /usr/bin/docker || true'
+        sh 'ls -l /usr/local/bin/docker || true' 
+        sh 'ls -l /var/run/docker.sock || true'
+        sh 'which docker'
         
       }
     }
