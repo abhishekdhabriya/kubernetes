@@ -17,7 +17,7 @@ podTemplate(label: 'twistlock-example-builder',
   ]
 )
 {
-node('jnlp') {
+node('twistlock-example-builder') {
     def app
     
    
