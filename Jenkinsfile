@@ -43,7 +43,7 @@ podTemplate(label: 'kube-by-example',
     
     stage('Deploy Image') {
       container('alpine') {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry( '', 'docker-hub-creds' ) {
             dockerImage.push()
         }
       }
