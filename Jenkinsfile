@@ -50,6 +50,7 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('alpine') {
+            sh "docker build -t ${imageTag} ."
         }
       }
     }
@@ -58,7 +59,7 @@ spec:
       when { branch 'canary' }
       steps {
         container('kubectl') {
-          docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
+
         } 
       }
     }
