@@ -18,6 +18,12 @@ podTemplate(label: 'kube-by-example',
 )
 {
   node ('kube-by-example') {
+    
+    environment {
+    registry = "anishnath/hello"
+    registryCredential = 'docker-hub-creds'
+    dockerImage = ''
+  }
 
     stage ('Initiliaze Docker') { 
       container('jnlp') {
@@ -34,5 +40,16 @@ podTemplate(label: 'kube-by-example',
         docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
     }
+    
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    
   }
 }
