@@ -1,4 +1,4 @@
-podTemplate(label: 'twistlock-example-builder', 
+podTemplate(label: 'kube-by-example', 
   containers: [
     containerTemplate(
       name: 'jnlp',
@@ -20,7 +20,7 @@ podTemplate(label: 'twistlock-example-builder',
   node ('twistlock-example-builder') {
 
     stage ('Initiliaze Docker') { 
-      container('alpine') {
+      container('jnlp') {
         
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
