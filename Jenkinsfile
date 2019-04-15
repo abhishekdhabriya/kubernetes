@@ -58,7 +58,7 @@ spec:
       when { branch 'canary' }
       steps {
         container('kubectl') {
-          
+          docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
         } 
       }
     }
