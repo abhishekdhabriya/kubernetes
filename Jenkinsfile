@@ -37,7 +37,7 @@ spec:
     volumeMounts:
     - name: dockersock
       mountPath: "/var/run/docker.sock"
-volumes:
+  volumes:
    - name: dockersock
      hostPath:
        path: /var/run/docker.sock
