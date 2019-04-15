@@ -1,50 +1,52 @@
-podTemplate(label: 'kube-by-example', 
-  containers: [
-    containerTemplate(
-      name: 'jnlp',
-      image: 'jenkinsci/jnlp-slave:3.10-1-alpine',
-      args: '${computer.jnlpmac} ${computer.name}'
-    ),
-    containerTemplate(
-      name: 'alpine',
-      image: 'twistian/alpine:latest',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-  ],
-  volumes: [ 
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
-  ]
-)
-{
-  node ('kube-by-example') {
-    
-    environment {
-    registry = "anishnath/hello"
-    registryCredential = 'docker-hub-creds'
-    dockerImage = ''
+pipeline {
+  agent {
+    kubernetes {
+      label 'hello-app'
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  component: ci
+spec:
+  # Use service account that can deploy to all namespaces
+  serviceAccountName: jenkins
+  containers:
+  - name: golang
+    image: golang:1.10
+    command:
+    - cat
+    tty: true
+  - name: alpine
+    image: twistian/alpine:latest
+    command:
+    - cat
+    tty: true
+  - name: kubectl
+    image: gcr.io/cloud-builders/kubectl
+    command:
+    - cat
+    tty: true
+"""
+}
   }
-
-    stage ('Initiliaze Docker') { 
-      container('jnlp') {
-        
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+  stages {
+    stage('Test') {
+      steps {
+        container('golang') {
+          sh """
+            ln -s `pwd` /go/src/hello-app
+            cd /go/src/hello-app
+            go test
+          """
+        }
       }
     }
-
-    stage ('Cloning Git') { 
-      container('alpine') {
-        
-        git 'https://github.com/anishnath/kubernetes.git'
-        docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
-      }
-    }
-    
-    stage('Deploy Image') {
-      container('alpine') {
-          docker.withRegistry( '', 'docker-hub-creds' ) {
-            dockerImage.push()
+    stage('Build and push image with Container Builder') {
+      steps {
+        container('alpine') {
+          docker.build "anishnath/hello" + ":$BUILD_NUMBER"
         }
       }
     }
