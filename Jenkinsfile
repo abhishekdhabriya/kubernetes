@@ -1,3 +1,7 @@
+def project = 'anishnath'
+def  appName = 'hello'
+def  imageTag = ${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
 pipeline {
   agent {
     kubernetes {
@@ -18,8 +22,8 @@ spec:
     command:
     - cat
     tty: true
-  - name: alpine
-    image: twistian/alpine:latest
+  - name: gcloud
+    image: gcr.io/cloud-builders/gcloud
     command:
     - cat
     tty: true
@@ -36,8 +40,8 @@ spec:
       steps {
         container('golang') {
           sh """
-            ln -s `pwd` /go/src/hello-app
-            cd /go/src/hello-app
+            ln -s `pwd` /go/src/sample-app
+            cd /go/src/sample-app
             go test
           """
         }
@@ -45,10 +49,40 @@ spec:
     }
     stage('Build and push image with Container Builder') {
       steps {
-        container('alpine') {
-          docker.build anishnath/hello + ":$BUILD_NUMBER"
+        container('gcloud') {
+          
         }
       }
+    }
+    stage('Deploy Canary') {
+      // Canary branch
+      when { branch 'canary' }
+      steps {
+        container('kubectl') {
+          
+        } 
+      }
+    }
+    stage('Deploy Production') {
+      // Production branch
+      when { branch 'master' }
+      steps{
+        container('kubectl') {
+        
+        }
+      }
+    }
+    stage('Deploy Dev') {
+      // Developer Branches
+      when { 
+        not { branch 'master' } 
+        not { branch 'canary' }
+      } 
+      steps {
+        container('kubectl') {
+         
+        }
+      }     
     }
   }
 }
