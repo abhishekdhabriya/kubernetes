@@ -5,6 +5,12 @@ podTemplate(label: 'kube-by-example',
       image: 'jenkinsci/jnlp-slave:3.10-1-alpine',
       args: '${computer.jnlpmac} ${computer.name}'
     ),
+    containerTemplate(
+      name: 'alpine',
+      image: 'twistian/alpine:latest',
+      command: 'cat',
+      ttyEnabled: true
+    ),
   ],
   volumes: [ 
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
@@ -12,33 +18,6 @@ podTemplate(label: 'kube-by-example',
 )
 {
   node ('kube-by-example') {
-    
-    agent {
-    kubernetes {
-      label 'hello-app'
-      defaultContainer 'jnlp'
-      yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-labels:
-  component: ci
-spec:
-  # Use service account that can deploy to all namespaces
-  serviceAccountName: jenkins
-  containers:
-  - name: golang
-    image: golang:1.10
-    command:
-    - cat
-    tty: true
-  - name: kubectl
-    image: gcr.io/cloud-builders/kubectl
-    command:
-    - cat
-    tty: true
-"""
-}
 
     stage ('Initiliaze Docker') { 
       container('jnlp') {
@@ -55,7 +34,5 @@ spec:
         docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
     }
-      
-      
   }
 }
