@@ -28,19 +28,9 @@ podTemplate(label: 'twistlock-example-builder',
         
         stage('Cloning Git') {
         steps {
-             git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
+             git 'https://github.com/anishnath/kubernetes.git'
          }
        }
-        
-        
-        sh 'uname -a'
-        sh 'id'
-        sh 'whoami'
-        sh 'printenv'
-        sh 'mount'
-        sh 'ls -l /usr/bin/docker || true'
-        sh 'ls -l /usr/local/bin/docker || true' 
-        sh 'ls -l /var/run/docker.sock || true'
         docker.build 'gustavoapolinario/docker-test:2'
         
       }
