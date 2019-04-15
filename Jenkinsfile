@@ -27,7 +27,7 @@ podTemplate(label: 'kube-by-example',
     }
 
     stage ('Cloning Git') { 
-      container('alpine') {
+      container('jnlp') {
         git 'https://github.com/anishnath/kubernetes.git'
         docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
