@@ -2,7 +2,9 @@ podTemplate(label: 'slave', containers: [
     containerTemplate(name: 'docker', image: 'docker:dind', ttyEnabled: true, alwaysPullImage: true, privileged: true,
       command: 'dockerd --host=unix:///var/run/docker.sock')
   ],
-  volumes: [emptyDirVolume(memory: false, mountPath: '/var/lib/docker')]) {
+  volumes: [hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),]
+  )
+{
 node('slave') {
     def app
     
