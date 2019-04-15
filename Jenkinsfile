@@ -47,6 +47,14 @@ spec:
         }
       }
     }
+    
+    stage ('Initiliaze Docker') { 
+      container('alpine') {
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+      }
+    }
+    
     stage('Build and push image with Container Builder') {
       steps {
         container('alpine') {
