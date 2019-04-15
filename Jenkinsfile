@@ -1,11 +1,23 @@
-podTemplate(label: 'slave', containers: [
-    containerTemplate(name: 'docker', image: 'docker:dind', ttyEnabled: true, alwaysPullImage: true, privileged: true,
-      command: 'dockerd --host=unix:///var/run/docker.sock')
+podTemplate(label: 'twistlock-example-builder', 
+  containers: [
+    containerTemplate(
+      name: 'jnlp',
+      image: 'jenkinsci/jnlp-slave:3.10-1-alpine',
+      args: '${computer.jnlpmac} ${computer.name}'
+    ),
+    containerTemplate(
+      name: 'alpine',
+      image: 'twistian/alpine:latest',
+      command: 'cat',
+      ttyEnabled: true
+    ),
   ],
-  volumes: [hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),]
-  )
+  volumes: [ 
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
+  ]
+)
 {
-node('slave') {
+node('jnlp') {
     def app
     
    
