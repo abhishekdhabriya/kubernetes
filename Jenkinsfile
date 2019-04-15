@@ -55,7 +55,7 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('docker') {
-            sh 
+            sh "which docker"
             sh "docker build -t ${imageTag} ."
         }
       }
