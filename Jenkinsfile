@@ -17,7 +17,11 @@ podTemplate(label: 'kube-by-example',
   ]
 )
 {
-  node ('kube-by-example') {
+  pipeline  {
+    
+    agent 'kube-by-example'
+    
+    stages {
 
     stage ('Initiliaze Docker') { 
       container('jnlp') {
@@ -34,5 +38,6 @@ podTemplate(label: 'kube-by-example',
         docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
     }
+  }
   }
 }
