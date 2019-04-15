@@ -6,8 +6,8 @@ podTemplate(label: 'kube-by-example',
       args: '${computer.jnlpmac} ${computer.name}'
     ),
     containerTemplate(
-      name: 'alpine',
-      image: 'twistian/alpine:latest',
+      name: 'kubectl',
+      image: 'gcr.io/cloud-builders/kubectl',
       command: 'cat',
       ttyEnabled: true
     ),
@@ -17,15 +17,10 @@ podTemplate(label: 'kube-by-example',
   ]
 )
 {
-  pipeline  {
+  node ('kube-by-example') {
     
-    agent 'kube-by-example'
-    
-    stages {
-
     stage ('Initiliaze Docker') { 
       container('jnlp') {
-        
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
       }
@@ -33,11 +28,9 @@ podTemplate(label: 'kube-by-example',
 
     stage ('Cloning Git') { 
       container('alpine') {
-        
         git 'https://github.com/anishnath/kubernetes.git'
         docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
     }
-  }
   }
 }
