@@ -29,8 +29,8 @@ spec:
     command:
     - cat
     tty: true
-  - name: alpine
-    image: twistian/alpine:latest
+  - name: docker
+    image: docker
     command:
     - cat
     tty: true  
@@ -54,7 +54,8 @@ spec:
     
     stage('Build and push image with Container Builder') {
       steps {
-        container('alpine') {
+        container('docker') {
+            sh 
             sh "docker build -t ${imageTag} ."
         }
       }
