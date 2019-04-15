@@ -27,6 +27,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: alpine
+    image: twistian/alpine:latest
+    command:
+    - cat
+    tty: true  
 """
 }
   }
@@ -44,8 +49,9 @@ spec:
     }
     stage('Build and push image with Container Builder') {
       steps {
-        container('gcloud') {
-          
+        container('alpine') {
+          git 'https://github.com/anishnath/kubernetes.git'
+          docker.build anishnath/hello+ ":$BUILD_NUMBER"
         }
       }
     }
