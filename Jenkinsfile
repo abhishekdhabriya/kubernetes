@@ -31,7 +31,7 @@ podTemplate(label: 'twistlock-example-builder',
         sh 'ls -l /usr/bin/docker || true'
         sh 'ls -l /usr/local/bin/docker || true' 
         sh 'ls -l /var/run/docker.sock || true'
-        sh 'which docker'
+        docker.build 'gustavoapolinario/docker-test:2'
         
       }
     }
