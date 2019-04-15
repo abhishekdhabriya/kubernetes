@@ -50,8 +50,6 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('alpine') {
-          git 'https://github.com/anishnath/kubernetes.git'
-          docker.build anishnath/hello+ ":$BUILD_NUMBER"
         }
       }
     }
