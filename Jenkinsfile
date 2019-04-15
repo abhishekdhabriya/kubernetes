@@ -19,20 +19,19 @@ podTemplate(label: 'twistlock-example-builder',
 {
   node ('twistlock-example-builder') {
 
-    stage ('Pull image') { 
+    stage ('Initiliaze Docker') { 
       container('alpine') {
         
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
+      }
+    }
+
+    stage ('Cloning Git') { 
+      container('alpine') {
         
-        
-        stage('Cloning Git') {
-        steps {
-             git 'https://github.com/anishnath/kubernetes.git'
-         }
-       }
-        docker.build 'gustavoapolinario/docker-test:2'
-        
+        git 'https://github.com/anishnath/kubernetes.git'
+        docker.build 'anishnath/hello'+ ":$BUILD_NUMBER"
       }
     }
   }
