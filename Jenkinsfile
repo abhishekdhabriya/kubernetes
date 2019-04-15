@@ -46,7 +46,7 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('alpine') {
-          docker.build "anishnath/hello" + ":$BUILD_NUMBER"
+          docker.build anishnath/hello + ":$BUILD_NUMBER"
         }
       }
     }
