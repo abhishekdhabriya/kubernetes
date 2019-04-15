@@ -26,6 +26,12 @@ podTemplate(label: 'twistlock-example-builder',
         env.PATH = "${dockerHome}/bin:${env.PATH}"
         
         
+        stage('Cloning Git') {
+        steps {
+             git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
+         }
+       }
+        
         
         sh 'uname -a'
         sh 'id'
