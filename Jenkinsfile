@@ -99,7 +99,9 @@ spec:
       when { branch 'master' }
       steps{
         container('kubectl') {
-        
+          sh("sed -i.bak 's#anishnath/hello:latest#${imageTag}#' ./production/*.yaml")
+          sh("kubectl --namespace=production apply -f production/deploy.yaml")
+          sh("echo http://`kubectl --namespace=production get service/kuebernetes-by-example-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${svcName}")
         }
       }
     }
