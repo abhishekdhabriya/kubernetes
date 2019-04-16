@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kuebernetes-by-example
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: 'anishnath/hello:master'
+          image: 'anishnath/hello:latest'
           ports:
             - containerPort: 8080
 
