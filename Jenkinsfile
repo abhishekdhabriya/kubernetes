@@ -88,12 +88,9 @@ spec:
       when { branch 'canary' }
       steps {
         container('kubectl') {
-          
-          sh("sed -i.bak 's#anishnath/hello:master#${imageTag}#' ./canary/*.yaml")
-          sh("kubectl --namespace=production apply -f k8s/services/")
-          sh("kubectl --namespace=production apply -f k8s/canary/")
+          sh("sed -i.bak 's#anishnath/hello:latest#${imageTag}#' ./canary/*.yaml")
+          sh("kubectl --namespace=production apply -f canary/deploy.yaml")
           sh("echo http://`kubectl --namespace=production get service/kuebernetes-by-example-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${svcName}")
-
         } 
       }
     }
