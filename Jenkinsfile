@@ -72,7 +72,7 @@ spec:
             //sh "which docker"
             //sh "docker build -t ${imageTag} ."
              script {
-                dockerImage = docker.build ":$imageTag"
+                dockerImage = docker.build "$imageTag"
            } 
         }
       }
