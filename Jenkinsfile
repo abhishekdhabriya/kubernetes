@@ -69,9 +69,13 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('docker') {
-            sh "which docker"
-            sh "docker build -t ${imageTag} ."
-            
+            //sh "which docker"
+            //sh "docker build -t ${imageTag} ."
+           steps{
+             script {
+                dockerImage = docker.build registry + ":$imageTag"
+              }
+           } 
         }
       }
     }
