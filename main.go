@@ -28,7 +28,7 @@ func main() {
 func hello(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Serving request: %s", r.URL.Path)
 	host, _ := os.Hostname()
-	fmt.Fprintf(w, "Kuberenetes by Example!\n")
+	fmt.Fprintf(w, "Kuberenetes by Example! From Canary\n")
 	fmt.Fprintf(w, "http://leanpub.com/kube : 1.0.0\n")
 	fmt.Fprintf(w, "Hostname: %s\n", host)
 }
