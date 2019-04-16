@@ -71,10 +71,8 @@ spec:
         container('docker') {
             //sh "which docker"
             //sh "docker build -t ${imageTag} ."
-           steps{
              script {
                 dockerImage = docker.build registry + ":$imageTag"
-              }
            } 
         }
       }
