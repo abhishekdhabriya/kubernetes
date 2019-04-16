@@ -73,6 +73,9 @@ spec:
             //sh "docker build -t ${imageTag} ."
              script {
                 dockerImage = docker.build "$imageTag"
+                docker.withRegistry( '', registryCredential ) {
+                dockerImage.push()
+                  }
            } 
         }
       }
