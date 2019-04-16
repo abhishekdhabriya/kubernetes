@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: 'anishnath/hello:master.8'
+          image: 'anishnath/hello:master'
           ports:
             - containerPort: 8080
 
