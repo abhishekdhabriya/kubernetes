@@ -5,6 +5,13 @@ def  imageTag = "${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
 
 pipeline {  
+  
+  environment {
+    registry = "anishnath/hello"
+    registryCredential = 'docker-hub-creds'
+    dockerImage = ''
+  }
+  
   agent {
     kubernetes {
       label 'hello-app'
@@ -49,8 +56,8 @@ spec:
       steps {
         container('golang') {
           sh """
-            ln -s `pwd` /go/src/sample-app
-            cd /go/src/sample-app
+            ln -s `pwd` /go/src/hello-app
+            cd /go/src/hello-app
             go test
           """
         }
@@ -64,9 +71,12 @@ spec:
         container('docker') {
             sh "which docker"
             sh "docker build -t ${imageTag} ."
+            
         }
       }
     }
+    
+    
     stage('Deploy Canary') {
       // Canary branch
       when { branch 'canary' }
