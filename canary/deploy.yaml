@@ -1,19 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kuebernetes-by-example
+  name: kuebernetes-by-example-canary
 spec:
   replicas: 2
   template:
     metadata:
       labels:
         app: hello
+        env: canary
     spec:
       containers:
         - name: hello
           image: 'anishnath/hello:latest'
           ports:
             - containerPort: 8080
+          imagePullPolicy: Always  
 
 ---
 apiVersion: v1
