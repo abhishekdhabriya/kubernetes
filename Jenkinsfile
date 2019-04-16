@@ -113,7 +113,13 @@ spec:
       } 
       steps {
         container('kubectl') {
-         
+          // Don't use public load balancing for development branches
+          // Create a Seperate name space for the Development Branch 
+          sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
+          sh("sed -i.bak 's#anishnath/hello:latest#${imageTag}#' ./dev/*.yaml")
+          sh("kubectl --namespace=${env.BRANCH_NAME} apply -f de/deploy.yaml")
+          echo 'To access your environment run `kubectl proxy`'
+          echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
         }
       }     
     }
