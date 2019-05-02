@@ -1,0 +1,8 @@
+postgresql:
+  postgresPassword: pgstryaThs
+  persistence:
+    size: 1Gi
+
+anchoreGlobal:
+  defaultAdminPassword: da4rThgKuiTe
+  defaultAdminEmail: zarigatongy@gmail.com
