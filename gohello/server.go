@@ -2,7 +2,6 @@ package main
 
 import (
 	"gohello/routers"
-	"gohello/plugins"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/static"
 	"github.com/afex/hystrix-go/hystrix"
