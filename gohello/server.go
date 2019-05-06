@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/static"
 	"github.com/afex/hystrix-go/hystrix"
-	"github.com/afex/hystrix-go/hystrix/metric_collector"
 	log "github.com/sirupsen/logrus"
 	"os"
 	"net/http"
