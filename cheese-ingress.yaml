@@ -1,26 +1,26 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: cheese
+  name: test
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: stilton.minikube
+  - host: cheese1.canopussparta.com
     http:
       paths:
       - path: /
         backend:
           serviceName: stilton
           servicePort: http
-  - host: cheddar.minikube
+  - host: cheese2.canopussparta.com
     http:
       paths:
       - path: /
         backend:
           serviceName: cheddar
           servicePort: http
-  - host: wensleydale.minikube
+  - host: cheese3.canopussparta.com
     http:
       paths:
       - path: /
