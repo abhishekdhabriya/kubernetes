@@ -6,24 +6,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: cheese1.canopussparta.com
+  - host: aspirecloudtech.com
     http:
       paths:
       - path: /
         backend:
           serviceName: stilton
-          servicePort: http
-  - host: cheese2.canopussparta.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: cheddar
-          servicePort: http
-  - host: cheese3.canopussparta.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: wensleydale
           servicePort: http
